@@ -1,0 +1,27 @@
+{
+  "name": "bold",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "modules": true,
+  "scripts": {
+    "start": "node --max_old_space_size=13000 -r ts-node/register ./work.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.1",
+    "babel-jest": "^25.2.6",
+    "jest": "^25.2.7",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0"
+  }
+}
