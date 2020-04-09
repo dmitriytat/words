@@ -1,24 +1,15 @@
-import {findBestAnswer, printField, solveField} from "./index";
+import {createField, findBestAnswer, printField, solveField} from "./src/field";
 
-const field = [
-    ['_', '_', '_', '_', '_'],
-    ['_', '_', '_', '_', '_'],
-    ['к', 'а', 'з', 'а', 'к'],
-    ['_', '_', '_', '_', '_'],
-    ['_', '_', '_', '_', '_'],
-];
-
-// const field = [
-//     ['_', 'ь', 'ш', 'я', 'ш'],
-//     ['а', 'ч', 'у', 'р', 'п'],
-//     ['ш', 'у', 'т', 'к', 'а'],
-//     ['я', 'и', 'р', 'у', 'н'],
-//     ['т', 'к', 'ф', 'к', 'с'],
-// ];
+const field = createField('шутка');
 
 printField(field);
 
-solveField(field, [
-    'казак'
-], [])
-// findBestAnswer(solveField(field, ['казак'], []));
+const answers = solveField(field, ['шутка'], [], 2, 1);
+
+answers.forEach(answer => {
+    console.log('------------');
+    printField(answer.field);
+
+    console.log(answer.words);
+    console.log('------------');
+});

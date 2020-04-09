@@ -1,13 +1,13 @@
 import {
+    createField,
     findBestAnswer,
-    findEmpty,
-    findUnCompletedWords,
-    findVariants,
-    findWords,
-    getNeighbours, printField,
+    findEmptyLetters,
+    findUnCompletedWords, findWords,
+    getNeighbours,
+    printField,
     solveField
-} from "./index";
-
+} from "./src/field";
+import {findVariants} from "./src/dictionary";
 
 describe('All', function () {
     describe('words empty', function () {
@@ -17,16 +17,10 @@ describe('All', function () {
                 ['_', 'a']
             ];
 
-            expect(findEmpty(field)).toEqual([
-                [
-                    {s: '_', i: 0, j: 0},
-                ],
-                [
-                    {s: '_', i: 0, j: 1},
-                ],
-                [
-                    {s: '_', i: 1, j: 0},
-                ]
+            expect(findEmptyLetters(field)).toEqual([
+                {s: '_', i: 0, j: 0},
+                {s: '_', i: 0, j: 1},
+                {s: '_', i: 1, j: 0},
             ])
         });
     });
@@ -119,17 +113,19 @@ describe('All', function () {
 
     describe('solveField', function () {
         it('should solveField', function () {
-            const field = [
-                ['_', '_', '_', '_', '_'],
-                ['_', '_', '_', '_', '_'],
-                ['ш', 'у', 'т', 'к', 'а'],
-                ['_', '_', '_', '_', '_'],
-                ['_', '_', '_', '_', '_'],
-            ];
+            // const field = [
+            //     ['_', '_', '_', '_', '_'],
+            //     ['_', '_', '_', '_', '_'],
+            //     ['ш', 'у', 'т', 'к', 'а'],
+            //     ['_', '_', '_', '_', '_'],
+            //     ['_', '_', '_', '_', '_'],
+            // ];
+
+            const field = createField('лохи');
 
             printField(field);
 
-            expect(findBestAnswer(solveField(field, [], []))).toEqual([]);
+            expect(findBestAnswer(solveField(field, ['лохи'], []))).toEqual([]);
         });
     });
 
