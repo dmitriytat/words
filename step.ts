@@ -1,4 +1,4 @@
-import {findReplacements, printField} from "./src/field";
+import {findAllUnCompletedWords, findReplacements, printField} from "./src/field";
 import {convertToString} from "./src/word";
 
 const field = [
@@ -11,7 +11,8 @@ const field = [
 
 printField(field);
 
-const replacements = findReplacements(field, ['казак'], 20);
+const unCompletedWords = findAllUnCompletedWords(field);
+const replacements = findReplacements(unCompletedWords, ['казак'], 20, 1);
 
 console.dir(replacements.map(r => ({
     ...r,

@@ -1,10 +1,10 @@
 import {createField, findBestAnswer, printField, solveField} from "./src/field";
 
-const field = createField('шутка');
+const field = createField('казак');
 
 printField(field);
 
-const answers = solveField(field, ['шутка'], [], 2, 1);
+const answers = solveField(field, ['казак'], [], 1, 1);
 
 answers.forEach(answer => {
     console.log('------------');

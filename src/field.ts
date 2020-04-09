@@ -111,13 +111,11 @@ export function isExistingCase(field: string[][], words: string[]) {
     });
 }
 
-export function findReplacements(field: string[][], words: string[], depth = 2) {
-    const unCompletedWords = findAllUnCompletedWords(field);
-
+export function findReplacements(unCompletedWords: Word[], words: string[], depth = 2, vdepth = 2) {
     const replacements = unCompletedWords
         .map(word => ({
             word,
-            variants: findVariants(word).filter(variant => !words.includes(variant)),
+            variants: findVariants(word).filter(variant => !words.includes(variant)).slice(0, vdepth),
         }))
         .filter(replacement => replacement.variants.length);
 
@@ -131,22 +129,22 @@ export function solveField(field: Field, words: string[] = [], answers: Answer[]
         return answers;
     }
 
-    if (isExistingCase(field, words)) {
-        return answers;
+    const unCompletedWords = findAllUnCompletedWords(field);
+
+    if (!unCompletedWords.length) {
+        answers.push({
+            field,
+            words,
+        })
     }
 
-    fields.push({
-        field,
-        words
-    });
-
-    const replacements = findReplacements(field, words, depth);
+    const replacements = findReplacements(unCompletedWords, words, depth, depth);
 
     replacements.forEach(replacement => {
-        replacement.variants.slice(0, depth).forEach(variant => {
+        replacement.variants.forEach(variant => {
             const fld = fillWord(field, replacement.word, variant);
 
-            solveField(fld, words.concat([variant]), answers, depth);
+            solveField(fld, words.concat([variant]), answers, depth, count);
         });
     });
 
